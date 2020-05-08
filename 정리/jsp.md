@@ -35,5 +35,37 @@ Java 언어를 기반으로 한 Server Side 스크립트 언어
         * h(12), H(24) : 시
         * m : 분
         * s : 초
-        
+4. `<c:set/>`        
+    * `<c:set var="변수명" value="값" scope="영역"/>`
+        * var속성에는 만들 변수명을 입력하고 value속성에는 변수에 들어갈 값을 입력한다.
+        * scope속성에는 해당 변수가 저장될 영역으로, page, request, session, application 중 하나를 입력한다.
+        * 입력하지 않으면 기본값인 page로 지정한다.
+        * `<c:set var="name" value="1"/>` : name = 1
+    * `<c:set target="대상" property="속성명" value="값"/>`
+        * target, property, value 속성을 이용해 자바 빈 클래스와 Map 객체를 대상으로 하여 속성과 값을 설정하는 방법
+        * 이 경우에 대상으로 정한 객체에는 속성 값을 얻을 수 있는 setter 메서드가 필요하다.
+        * 예시
+          ``` java
+          public class Number {
+          	
+              private String value;
+              
+              public void setValue(value) {
+              	this.value = value;
+              }
+              
+              public String getValue() {
+              	return value;
+              }
+          }
+          ```
+          ```jsp
+          <% Number number = new Number(); %>
+          
+          <c:set target="${number}" property="value" value="10"/>
+          <p>${number.value}</p> // 10
+          
+          // number 객체가 생성이 되었고 target속성에 표현 언어 형식으로 객체를 지정해준다.
+          // 그다음 변경할 객체의 속성명과 값을 입력하고 있다.
+          ```
 다른 내용은 추후 추가 예정
